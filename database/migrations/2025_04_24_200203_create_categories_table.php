@@ -10,14 +10,15 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('categories', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->enum('jenis', ['income', 'outcome']);
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('nama');
+            $table->enum('jenis', ['income', 'expanse']);
+            $table->timestamps();
+        });
+    }
 
 
     /**

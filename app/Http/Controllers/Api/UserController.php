@@ -5,61 +5,55 @@ namespace App\Http\Controllers\Api;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DataResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return User::all(); // Tampilkan semua user
+        return new DataResource(Auth::user(), 'success', 'get data user successfully');
     }
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role' => ['required', Rule::in(['admin', 'user'])],
-        ]);
+        $user = User::find(Auth::user()->id);
 
-        $validated['password'] = Hash::make($validated['password']);
-
-        $user = User::create($validated);
-
-        return response()->json($user, 201);
-    }
-
-    public function show(User $user)
-    {
-        return $user;
-    }
-
-    public function update(Request $request, User $user)
-    {
         $validated = $request->validate([
             'name' => 'sometimes|required',
-            'email' => ['sometimes', 'required', 'email', Rule::unique('users')->ignore($user->id)],
-            'password' => 'nullable|min:6',
-            'role' => ['sometimes', Rule::in(['admin', 'user'])],
+            'password' => 'sometimes|required|min:6',
+            'validate_password' => 'required',
         ]);
 
-        if (isset($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        } else {
-            unset($validated['password']);
+        if (isset($validated['name'])) {
+            if (Hash::check($validated['validate_password'], $user->password)) {
+                $data = $user->update(['name' => $validated['name']]);
+                if ($data) {
+                    return new DataResource($user, 'success', 'username updated');
+                }
+                return response()->json(['status' => 'failed', 'message' => 'failed update username'], 500);
+            };
+            return response()->json(['status' => 'failed', 'message' => 'password not match'], 500);
         }
 
-        $user->update($validated);
-
-        return response()->json($user);
+        if (Hash::check($validated['validate_password'], $user->password)) {
+            $data = $user->update(['password' => Hash::make($validated['password'])]);
+            if ($data) {
+                return new DataResource($user, 'success', 'password updated');
+            }
+            return response()->json(['status' => 'failed', 'message' => 'failed update password'], 500);
+        }
+        return response()->json(['status' => 'failed', 'message' => 'password not match'], 500);
     }
 
-    public function destroy(User $user)
+    public function destroy()
     {
-        $user->delete();
+        $data = User::find(Auth::user()->id)->delete();
 
-        return response()->json(['message' => 'User deleted']);
+        if ($data) {
+            return response()->json(['status' => 'success', 'message' => 'user deleted']);
+        }
+        return response()->json(['status' => 'failed', 'message' => 'failed delete user'], 500);
     }
 }
