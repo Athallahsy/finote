@@ -20,11 +20,11 @@ class TransactionController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'judul'       => 'required',
             'jumlah'      => 'required|numeric',
-            'tanggal'     => 'required|date',
+            'judul'       => 'required',
             'jenis'       => 'required|in:income,expanse',
             'keterangan'  => 'nullable',
+            'tanggal'     => 'required|date',
         ]);
 
         $data = Transaction::create([
@@ -48,12 +48,12 @@ class TransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         $request->validate([
-            'judul'       => 'required',
-            'jumlah'      => 'required|numeric',
-            'tanggal'     => 'required|date',
-            'jenis'       => 'required|in:income,expanse',
             'category_id' => 'required|exists:categories,id',
+            'jumlah'      => 'required|numeric',
+            'judul'       => 'required',
+            'jenis'       => 'required|in:income,expanse',
             'keterangan'  => 'nullable',
+            'tanggal'     => 'required|date',
         ]);
 
         $this->authorizeTransaction($transaction);
