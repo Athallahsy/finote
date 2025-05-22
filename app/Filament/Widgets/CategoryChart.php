@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryChart extends ApexChartWidget
 {
@@ -19,28 +20,29 @@ class CategoryChart extends ApexChartWidget
     protected function getOptions(): array
     {
         $start = isset($this->filters['startDate'])
-    ? Carbon::parse($this->filters['startDate'])->startOfDay()
-    : now()->startOfMonth()->startOfDay();
+            ? Carbon::parse($this->filters['startDate'])->startOfDay()
+            : now()->startOfMonth()->startOfDay();
 
-    $end = isset($this->filters['endDate'])
-        ? Carbon::parse($this->filters['endDate'])->endOfDay()
-        : now()->endOfDay();
+        $end = isset($this->filters['endDate'])
+            ? Carbon::parse($this->filters['endDate'])->endOfDay()
+            : now()->endOfDay();
 
-    $data = Transaction::where('jenis', 'expanse')
-        ->whereBetween('created_at', [$start, $end])
-        ->selectRaw('SUM(jumlah) as total, category_id')
-        ->groupBy('category_id')
-        ->with('category')
-        ->get();
+        $data = Transaction::where('jenis', 'expanse')
+            ->where('user_id', Auth::id())
+            ->whereBetween('created_at', [$start, $end])
+            ->selectRaw('SUM(jumlah) as total, category_id')
+            ->groupBy('category_id')
+            ->with('category')
+            ->get();
 
-    // Handle empty data
-    $labels = $data->isEmpty()
-        ? ['Tidak ada data']
-        : $data->map(fn ($item) => $item->category->nama ?? 'Tidak diketahui')->toArray();
+        // Handle empty data
+        $labels = $data->isEmpty()
+            ? ['Tidak ada data']
+            : $data->map(fn($item) => $item->category->nama ?? 'Tidak diketahui')->toArray();
 
-    $totals = $data->isEmpty()
-        ? [0]
-        : $data->pluck('total')->map(fn ($total) => (float) $total)->toArray();
+        $totals = $data->isEmpty()
+            ? [0]
+            : $data->pluck('total')->map(fn($total) => (float) $total)->toArray();
 
         return [
             'series' => $totals,

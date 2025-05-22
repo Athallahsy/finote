@@ -8,6 +8,7 @@ use App\Models\Transaction;
 use Filament\Pages\Dashboard\Concerns\HasFilters;
 use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SummaryStatsOverview extends BaseWidget
 {
@@ -17,61 +18,65 @@ class SummaryStatsOverview extends BaseWidget
     protected static ?int $sort = 1; // Widget display order
 
     protected function getCards(): array
-{
+    {
 
-    $start = $this->filters['startDate'] ?? now()->startOfMonth();
-    $end = $this->filters['endDate'] ?? now()->endOfMonth();
+        $start = $this->filters['startDate'] ?? now()->startOfMonth();
+        $end = $this->filters['endDate'] ?? now()->endOfMonth();
 
-    $startDate = Carbon::parse($start)->startOfDay();
-    $endDate = Carbon::parse($end)->endOfDay();
+        $startDate = Carbon::parse($start)->startOfDay();
+        $endDate = Carbon::parse($end)->endOfDay();
 
-    $currentIncome = Transaction::where('jenis', 'income')
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->sum('jumlah');
+        $currentIncome = Transaction::where('jenis', 'income')
+            ->where('user_id', Auth::id())
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('jumlah');
 
-    $currentExpanse = Transaction::where('jenis', 'expanse')
-        ->whereBetween('created_at', [$startDate, $endDate])
-        ->sum('jumlah');
+        $currentExpanse = Transaction::where('jenis', 'expanse')
+            ->where('user_id', Auth::id())
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('jumlah');
 
-    $monthlyBalance = $currentIncome - $currentExpanse;
+        $monthlyBalance = $currentIncome - $currentExpanse;
 
-    // Hitung rentang waktu sebelumnya untuk perbandingan
-    $previousStart = $startDate->copy()->subDays($endDate->diffInDays($startDate) + 1);
-    $previousEnd = $startDate->copy()->subDay();
+        // Hitung rentang waktu sebelumnya untuk perbandingan
+        $previousStart = $startDate->copy()->subDays($endDate->diffInDays($startDate) + 1);
+        $previousEnd = $startDate->copy()->subDay();
 
-    $previousIncome = Transaction::where('jenis', 'income')
-        ->whereBetween('created_at', [$previousStart, $previousEnd])
-        ->sum('jumlah');
+        $previousIncome = Transaction::where('jenis', 'income')
+            ->where('user_id', Auth::id())
+            ->whereBetween('created_at', [$previousStart, $previousEnd])
+            ->sum('jumlah');
 
-    $previousExpanse = Transaction::where('jenis', 'expanse')
-        ->whereBetween('created_at', [$previousStart, $previousEnd])
-        ->sum('jumlah');
+        $previousExpanse = Transaction::where('jenis', 'expanse')
+            ->where('user_id', Auth::id())
+            ->whereBetween('created_at', [$previousStart, $previousEnd])
+            ->sum('jumlah');
 
-    $formatCurrency = fn ($amount) => 'Rp ' . number_format($amount, 0, ',', '.');
+        $formatCurrency = fn($amount) => 'Rp ' . number_format($amount, 0, ',', '.');
 
-    return [
-        Card::make('Total Income', $formatCurrency($currentIncome))
-            ->description($this->getChangeDescription($currentIncome, $previousIncome))
-            ->descriptionIcon($this->getTrendIcon($currentIncome, $previousIncome))
-            ->color('success')
-            ->icon('heroicon-s-arrow-trending-up')
-            ->chart($this->getMonthlyTrend('income', $startDate, $endDate)),
+        return [
+            Card::make('Total Income', $formatCurrency($currentIncome))
+                ->description($this->getChangeDescription($currentIncome, $previousIncome))
+                ->descriptionIcon($this->getTrendIcon($currentIncome, $previousIncome))
+                ->color('success')
+                ->icon('heroicon-s-arrow-trending-up')
+                ->chart($this->getMonthlyTrend('income', $startDate, $endDate)),
 
-        Card::make('Total Expanse', $formatCurrency($currentExpanse))
-            ->description($this->getChangeDescription($currentExpanse, $previousExpanse))
-            ->descriptionIcon($this->getTrendIcon($currentExpanse, $previousExpanse))
-            ->color('danger')
-            ->icon('heroicon-s-arrow-trending-down')
-            ->chart($this->getMonthlyTrend('expanse', $startDate, $endDate)),
+            Card::make('Total Expanse', $formatCurrency($currentExpanse))
+                ->description($this->getChangeDescription($currentExpanse, $previousExpanse))
+                ->descriptionIcon($this->getTrendIcon($currentExpanse, $previousExpanse))
+                ->color('danger')
+                ->icon('heroicon-s-arrow-trending-down')
+                ->chart($this->getMonthlyTrend('expanse', $startDate, $endDate)),
 
-        Card::make('Balance', $formatCurrency($monthlyBalance))
-            ->description($this->getBalanceDescription($monthlyBalance, ($currentIncome + $currentExpanse)))
-            ->descriptionIcon($monthlyBalance >= 0 ? 'heroicon-s-arrow-up' : 'heroicon-s-arrow-down')
-            ->color($monthlyBalance >= 0 ? 'success' : 'danger')
-            ->icon($monthlyBalance >= 0 ? 'heroicon-s-banknotes' : 'heroicon-s-exclamation-circle')
-            ->chart($this->getBalanceTrend($startDate, $endDate)),
-    ];
-}
+            Card::make('Balance', $formatCurrency($monthlyBalance))
+                ->description($this->getBalanceDescription($monthlyBalance, ($currentIncome + $currentExpanse)))
+                ->descriptionIcon($monthlyBalance >= 0 ? 'heroicon-s-arrow-up' : 'heroicon-s-arrow-down')
+                ->color($monthlyBalance >= 0 ? 'success' : 'danger')
+                ->icon($monthlyBalance >= 0 ? 'heroicon-s-banknotes' : 'heroicon-s-exclamation-circle')
+                ->chart($this->getBalanceTrend($startDate, $endDate)),
+        ];
+    }
 
 
     protected function getChangeDescription(float $current, float $previous): string
@@ -81,9 +86,11 @@ class SummaryStatsOverview extends BaseWidget
         $change = (($current - $previous) / $previous) * 100;
         $absChange = abs($change);
 
-        return sprintf('%s%.2f%% from last month',
+        return sprintf(
+            '%s%.2f%% from last month',
             $change >= 0 ? '+' : '-',
-            $absChange);
+            $absChange
+        );
     }
 
     protected function getTrendIcon(float $current, float $previous): string
@@ -109,6 +116,7 @@ class SummaryStatsOverview extends BaseWidget
 
         while ($date <= $endDate) {
             $amount = Transaction::where('jenis', $type)
+                ->where('user_id', Auth::id())
                 ->whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->sum('jumlah');
@@ -127,11 +135,13 @@ class SummaryStatsOverview extends BaseWidget
 
         while ($date <= $endDate) {
             $income = Transaction::where('jenis', 'income')
+                ->where('user_id', Auth::id())
                 ->whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->sum('jumlah');
 
             $expanse = Transaction::where('jenis', 'expanse')
+                ->where('user_id', Auth::id())
                 ->whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->sum('jumlah');
@@ -142,5 +152,4 @@ class SummaryStatsOverview extends BaseWidget
 
         return $trend;
     }
-
 }

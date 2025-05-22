@@ -136,11 +136,13 @@
             <h1 class="brand-title animate__animated animate__fadeInDown">Finote.</h1>
             <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
                 Smart & simple finance management. Track your money, stay in control, and reach your goals faster.
+                <br><br>
+                <i>Register only visible in Mobile Apps</i>
             </p>
 
             <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mb-4 animate__animated animate__fadeInUp animate__delay-2s">
                 <a href="{{ url('/admin/login') }}" class="btn btn-main btn-lg">Login</a>
-                <a href="{{ url('/register') }}" class="btn btn-outline-light btn-lg">Register</a>
+                {{-- <a href="{{ url('/register') }}" class="btn btn-outline-light btn-lg">Register</a> --}}
             </div>
 
             <div class="features animate__animated animate__fadeInUp animate__delay-3s">

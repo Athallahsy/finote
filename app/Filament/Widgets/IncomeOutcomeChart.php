@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class IncomeOutcomeChart extends ApexChartWidget
@@ -25,11 +26,13 @@ class IncomeOutcomeChart extends ApexChartWidget
             $incomeData[] = (float) Transaction::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->where('jenis', 'income')
+                ->where('user_id', Auth::id())
                 ->sum('jumlah');
 
             $expanseData[] = (float) Transaction::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->where('jenis', 'expanse')
+                ->where('user_id', Auth::id())
                 ->sum('jumlah');
         }
 
