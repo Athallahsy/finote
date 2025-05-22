@@ -29,11 +29,11 @@ class SummaryStatsOverview extends BaseWidget
         ->whereBetween('created_at', [$startDate, $endDate])
         ->sum('jumlah');
 
-    $currentOutcome = Transaction::where('jenis', 'outcome')
+    $currentExpanse = Transaction::where('jenis', 'expanse')
         ->whereBetween('created_at', [$startDate, $endDate])
         ->sum('jumlah');
 
-    $monthlyBalance = $currentIncome - $currentOutcome;
+    $monthlyBalance = $currentIncome - $currentExpanse;
 
     // Hitung rentang waktu sebelumnya untuk perbandingan
     $previousStart = $startDate->copy()->subDays($endDate->diffInDays($startDate) + 1);
@@ -43,7 +43,7 @@ class SummaryStatsOverview extends BaseWidget
         ->whereBetween('created_at', [$previousStart, $previousEnd])
         ->sum('jumlah');
 
-    $previousOutcome = Transaction::where('jenis', 'outcome')
+    $previousExpanse = Transaction::where('jenis', 'expanse')
         ->whereBetween('created_at', [$previousStart, $previousEnd])
         ->sum('jumlah');
 
@@ -57,15 +57,15 @@ class SummaryStatsOverview extends BaseWidget
             ->icon('heroicon-s-arrow-trending-up')
             ->chart($this->getMonthlyTrend('income', $startDate, $endDate)),
 
-        Card::make('Total Outcome', $formatCurrency($currentOutcome))
-            ->description($this->getChangeDescription($currentOutcome, $previousOutcome))
-            ->descriptionIcon($this->getTrendIcon($currentOutcome, $previousOutcome))
+        Card::make('Total Expanse', $formatCurrency($currentExpanse))
+            ->description($this->getChangeDescription($currentExpanse, $previousExpanse))
+            ->descriptionIcon($this->getTrendIcon($currentExpanse, $previousExpanse))
             ->color('danger')
             ->icon('heroicon-s-arrow-trending-down')
-            ->chart($this->getMonthlyTrend('outcome', $startDate, $endDate)),
+            ->chart($this->getMonthlyTrend('expanse', $startDate, $endDate)),
 
         Card::make('Balance', $formatCurrency($monthlyBalance))
-            ->description($this->getBalanceDescription($monthlyBalance, ($currentIncome + $currentOutcome)))
+            ->description($this->getBalanceDescription($monthlyBalance, ($currentIncome + $currentExpanse)))
             ->descriptionIcon($monthlyBalance >= 0 ? 'heroicon-s-arrow-up' : 'heroicon-s-arrow-down')
             ->color($monthlyBalance >= 0 ? 'success' : 'danger')
             ->icon($monthlyBalance >= 0 ? 'heroicon-s-banknotes' : 'heroicon-s-exclamation-circle')
@@ -131,12 +131,12 @@ class SummaryStatsOverview extends BaseWidget
                 ->whereMonth('created_at', $date->month)
                 ->sum('jumlah');
 
-            $outcome = Transaction::where('jenis', 'outcome')
+            $expanse = Transaction::where('jenis', 'expanse')
                 ->whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->sum('jumlah');
 
-            $trend[] = $income - $outcome;
+            $trend[] = $income - $expanse;
             $date->addMonth();
         }
 

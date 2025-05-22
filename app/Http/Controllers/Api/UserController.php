@@ -37,14 +37,16 @@ class UserController extends Controller
             return response()->json(['status' => 'failed', 'message' => 'password not match'], 500);
         }
 
-        if (Hash::check($validated['validate_password'], $user->password)) {
-            $data = $user->update(['password' => Hash::make($validated['password'])]);
-            if ($data) {
-                return new DataResource($user, 'success', 'password updated');
+        if (isset($validated['password'])) {
+            if (Hash::check($validated['validate_password'], $user->password)) {
+                $data = $user->update(['password' => Hash::make($validated['password'])]);
+                if ($data) {
+                    return new DataResource($user, 'success', 'password updated');
+                }
+                return response()->json(['status' => 'failed', 'message' => 'failed update password'], 500);
             }
-            return response()->json(['status' => 'failed', 'message' => 'failed update password'], 500);
+            return response()->json(['status' => 'failed', 'message' => 'password not match'], 500);
         }
-        return response()->json(['status' => 'failed', 'message' => 'password not match'], 500);
     }
 
     public function destroy()

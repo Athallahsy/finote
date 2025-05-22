@@ -31,7 +31,7 @@ class CategoryResource extends Resource
         Select::make('jenis')
             ->options([
                 'income' => 'Pemasukan',
-                'outcome' => 'Pengeluaran',
+                'expanse' => 'Pengeluaran',
             ])
             ->required()
             ->label('Jenis'),
@@ -48,12 +48,12 @@ public static function table(Table $table): Table
     ->badge()
     ->icon(fn (string $state): string => match ($state) {
         'income' => 'heroicon-o-arrow-trending-up',
-        'outcome' => 'heroicon-o-arrow-trending-down',
+        'expanse' => 'heroicon-o-arrow-trending-down',
         default => 'heroicon-o-question-mark-circle',
     })
     ->color(fn (string $state): string => match ($state) {
         'income' => 'success',
-        'outcome' => 'danger',
+        'expanse' => 'danger',
         default => 'gray',
     }),
 

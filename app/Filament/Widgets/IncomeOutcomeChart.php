@@ -7,7 +7,7 @@ use Leandrocfe\FilamentApexCharts\Widgets\ApexChartWidget;
 
 class IncomeOutcomeChart extends ApexChartWidget
 {
-    protected static ?string $heading = '⚖️ Income vs Outcome';
+    protected static ?string $heading = '⚖️ Income vs Expanse';
     protected static bool $hasContainer = true;
     protected static ?string $pollingInterval = '10s';
 
@@ -16,7 +16,7 @@ class IncomeOutcomeChart extends ApexChartWidget
         $months = 6;
         $dates = [];
         $incomeData = [];
-        $outcomeData = [];
+        $expanseData = [];
 
         for ($i = $months; $i >= 0; $i--) {
             $date = now()->subMonths($i);
@@ -27,9 +27,9 @@ class IncomeOutcomeChart extends ApexChartWidget
                 ->where('jenis', 'income')
                 ->sum('jumlah');
 
-            $outcomeData[] = (float) Transaction::whereYear('created_at', $date->year)
+            $expanseData[] = (float) Transaction::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
-                ->where('jenis', 'outcome')
+                ->where('jenis', 'expanse')
                 ->sum('jumlah');
         }
 
@@ -47,7 +47,7 @@ class IncomeOutcomeChart extends ApexChartWidget
             ],
             'series' => [
                 ['name' => 'Income', 'data' => $incomeData],
-                ['name' => 'Outcome', 'data' => $outcomeData],
+                ['name' => 'Expanse', 'data' => $expanseData],
             ],
             'xaxis' => [
                 'categories' => $dates,

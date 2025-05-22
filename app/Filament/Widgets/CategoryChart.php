@@ -26,7 +26,7 @@ class CategoryChart extends ApexChartWidget
         ? Carbon::parse($this->filters['endDate'])->endOfDay()
         : now()->endOfDay();
 
-    $data = Transaction::where('jenis', 'outcome')
+    $data = Transaction::where('jenis', 'expanse')
         ->whereBetween('created_at', [$start, $end])
         ->selectRaw('SUM(jumlah) as total, category_id')
         ->groupBy('category_id')

@@ -38,7 +38,7 @@ class TransactionResource extends Resource
         Select::make('jenis')
             ->options([
                 'income' => 'Pemasukan',
-                'outcome' => 'Pengeluaran',
+                'expanse' => 'Pengeluaran',
             ])
             ->required()
             ->label('Jenis'),
@@ -64,11 +64,11 @@ public static function table(Table $table): Table
                 ->badge()
                 ->icon(fn (string $state): string => match ($state) {
                     'income' => 'heroicon-o-arrow-trending-up',
-                    'outcome' => 'heroicon-o-arrow-trending-down',
+                    'expanse' => 'heroicon-o-arrow-trending-down',
                 })
                 ->color(fn (string $state): string => match ($state) {
                     'income' => 'success',
-                    'outcome' => 'danger',
+                    'expanse' => 'danger',
                 }),
             TextColumn::make('category.nama')->label('Kategori'),
             TextColumn::make('keterangan')->label('Keterangan'),
@@ -77,7 +77,7 @@ public static function table(Table $table): Table
             SelectFilter::make('jenis')
                 ->options([
                     'income' => 'Pemasukan',
-                    'outcome' => 'Pengeluaran',
+                    'expanse' => 'Pengeluaran',
                 ])
                 ->label('Jenis Transaksi'),
 
