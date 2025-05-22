@@ -170,7 +170,10 @@ public static function table(Table $table): Table
 
 }
 
-
+    public static function canCreate(): bool
+    {
+        return false; // nonaktifkan tombol
+    }
     public static function getRelations(): array
     {
         return [
@@ -182,7 +185,6 @@ public static function table(Table $table): Table
     {
         return [
             'index' => Pages\ListTransactions::route('/'),
-            'create' => Pages\CreateTransaction::route('/create'),
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
 
         ];
