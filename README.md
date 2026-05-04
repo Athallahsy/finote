@@ -1,61 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+  <h1>💰 Finote</h1>
+  <p>Personal Finance Management Application</p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  ![Laravel](https://img.shields.io/badge/Laravel-12-red?style=flat&logo=laravel)
+  ![PHP](https://img.shields.io/badge/PHP-8.3-blue?style=flat&logo=php)
+  ![Filament](https://img.shields.io/badge/Filament-3-orange?style=flat)
+  ![License](https://img.shields.io/badge/license-MIT-green?style=flat)
+</div>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 About
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Finote is a personal finance management application that helps users track their income and expenses efficiently. Built with Laravel as the backend API and Flutter as the mobile frontend.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Features
 
-## Learning Laravel
+- 🔐 Authentication (Register, Login, Logout)
+- 💸 Transaction Management (Income & Expense)
+- 🗂️ Category Management
+- 📊 Admin Panel powered by Filament
+- 📄 PDF Export for transactions
+- 🌐 REST API for mobile integration
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**Backend:**
+- PHP 8.3
+- Laravel 12
+- Laravel Sanctum (API Authentication)
+- Filament 3 (Admin Panel)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Database:**
+- MySQL
 
-## Laravel Sponsors
+**Mobile:**
+- Flutter (by [ahmadabdillah001](https://github.com/ahmadabdillah001))
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ⚙️ Installation
 
-### Premium Partners
+```bash
+# Clone repo
+git clone https://github.com/Athallahsy/finote.git
+cd finote
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+# Install dependencies
+composer install
 
-## Contributing
+# Copy environment file
+cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Generate app key
+php artisan key:generate
 
-## Code of Conduct
+# Setup database di .env lalu jalankan migrasi
+php artisan migrate --seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Jalankan server
+php artisan serve
+```
 
-## Security Vulnerabilities
+## 🔑 API Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | /api/register | Register user baru | ❌ |
+| POST | /api/login | Login user | ❌ |
+| POST | /api/logout | Logout user | ✅ |
+| GET | /api/transactions | Ambil semua transaksi | ✅ |
+| POST | /api/transactions | Tambah transaksi | ✅ |
+| PUT | /api/transactions/{id} | Update transaksi | ✅ |
+| DELETE | /api/transactions/{id} | Hapus transaksi | ✅ |
+| GET | /api/categories | Ambil semua kategori | ✅ |
 
-## License
+## 👨‍💻 Developer
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Athallah Muhammad Syaffa**
+- GitHub: [@Athallahsy](https://github.com/Athallahsy)
+- Portfolio: [athallahsy.github.io/portofolio](https://athallahsy.github.io/portofolio)
+
+## 📄 License
+
+This project is open-sourced under the [MIT License](LICENSE).
