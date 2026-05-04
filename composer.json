@@ -9,10 +9,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "blade-ui-kit/blade-icons": "*",
-<<<<<<< HEAD
         "doctrine/dbal": "^4.4",
-=======
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         "filament/filament": "^3.3",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.1",
