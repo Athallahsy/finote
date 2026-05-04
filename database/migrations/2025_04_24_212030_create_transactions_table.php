@@ -18,11 +18,7 @@ return new class extends Migration
             $table->string('judul');
             $table->integer('jumlah');
             $table->date('tanggal');
-<<<<<<< HEAD
             $table->enum('jenis', ['income', 'expense']);
-=======
-            $table->enum('jenis', ['income', 'expanse']);
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
