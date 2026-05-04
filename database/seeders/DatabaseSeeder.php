@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+<<<<<<< HEAD
             'role' => 'admin',
+=======
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             'password' => Hash::make('11111111'),
         ]);
     }

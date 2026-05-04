@@ -22,7 +22,11 @@ class TransactionController extends Controller
             'category_id' => 'required|exists:categories,id',
             'jumlah'      => 'required|numeric',
             'judul'       => 'required',
+<<<<<<< HEAD
             'jenis'       => 'required|in:income,expense',
+=======
+            'jenis'       => 'required|in:income,expanse',
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             'keterangan'  => 'nullable',
             'tanggal'     => 'required|date',
         ]);
@@ -42,34 +46,52 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
+<<<<<<< HEAD
         $this->authorizeTransaction($transaction);
+=======
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         return new DataResource($transaction, 'success', 'get detail transaction successfully');
     }
 
     public function update(Request $request, Transaction $transaction)
     {
+<<<<<<< HEAD
         $this->authorizeTransaction($transaction);
 
+=======
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         $request->validate([
             'category_id' => 'required|exists:categories,id',
             'jumlah'      => 'required|numeric',
             'judul'       => 'required',
+<<<<<<< HEAD
             'jenis'       => 'required|in:income,expense',
+=======
+            'jenis'       => 'required|in:income,expanse',
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             'keterangan'  => 'nullable',
             'tanggal'     => 'required|date',
         ]);
 
+<<<<<<< HEAD
         $transaction->update($request->only([
             'category_id', 'jumlah', 'judul', 'jenis', 'keterangan', 'tanggal',
         ]));
 
+=======
+        $this->authorizeTransaction($transaction);
+        $transaction->update($request->all());
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         return new DataResource($transaction, 'success', 'update transaction successfully');
     }
 
     public function destroy(Transaction $transaction)
     {
         $this->authorizeTransaction($transaction);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         $data = $transaction->delete();
         if (!$data) {
             return response()->json(['status' => 'failed', 'message' => 'failed delete transaction'], 500);

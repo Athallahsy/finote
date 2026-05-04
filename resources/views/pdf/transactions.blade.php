@@ -9,6 +9,7 @@
             font-style: normal;
             src: url('{{ storage_path('fonts/DejaVuSans.ttf') }}') format('truetype');
         }
+<<<<<<< HEAD
         body { font-family: 'DejaVu Sans', sans-serif; font-size: 12px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -23,6 +24,28 @@
             Periode: {{ $start ?? 'awal' }} s.d. {{ $end ?? 'sekarang' }}
         </p>
     @endif
+=======
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center">Laporan Transaksi</h2>
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
     <table>
         <thead>
             <tr>
@@ -37,7 +60,11 @@
         <tbody>
             @foreach($records as $record)
             <tr>
+<<<<<<< HEAD
                 <td>{{ $record['tanggal'] }}</td>
+=======
+                <td>{{ $record['created_at'] }}</td>
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
                 <td>{{ $record['judul'] }}</td>
                 <td>{{ $record['jumlah'] }}</td>
                 <td>{{ $record['jenis'] }}</td>

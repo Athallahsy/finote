@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nama');
+<<<<<<< HEAD
             $table->enum('jenis', ['income', 'expense']);
+=======
+            $table->enum('jenis', ['income', 'expanse']);
+>>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             $table->timestamps();
         });
     }
