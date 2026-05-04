@@ -78,7 +78,3 @@ php artisan serve
 **Athallah Muhammad Syaffa**
 - GitHub: [@Athallahsy](https://github.com/Athallahsy)
 - Portfolio: [athallahsy.github.io/portofolio](https://athallahsy.github.io/portofolio)
-
-## 📄 License
-
-This project is open-sourced under the [MIT License](LICENSE).
