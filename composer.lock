@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "5e0b23ac486ea090c68a467d5e218b16",
-=======
-    "content-hash": "54cdce35054c849a6df2fa1eb7387245",
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -614,7 +610,6 @@
         },
         {
             "name": "doctrine/dbal",
-<<<<<<< HEAD
             "version": "4.4.3",
             "source": {
                 "type": "git",
@@ -630,28 +625,10 @@
             "require": {
                 "doctrine/deprecations": "^1.1.5",
                 "php": "^8.2",
-=======
-            "version": "4.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/dbal.git",
-                "reference": "33d2d7fe1269b2301640c44cf2896ea607b30e3e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/33d2d7fe1269b2301640c44cf2896ea607b30e3e",
-                "reference": "33d2d7fe1269b2301640c44cf2896ea607b30e3e",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/deprecations": "^0.5.3|^1",
-                "php": "^8.1",
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
                 "psr/cache": "^1|^2|^3",
                 "psr/log": "^1|^2|^3"
             },
             "require-dev": {
-<<<<<<< HEAD
                 "doctrine/coding-standard": "14.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.2",
@@ -663,19 +640,6 @@
                 "squizlabs/php_codesniffer": "4.0.1",
                 "symfony/cache": "^6.3.8|^7.0|^8.0",
                 "symfony/console": "^5.4|^6.3|^7.0|^8.0"
-=======
-                "doctrine/coding-standard": "12.0.0",
-                "fig/log-test": "^1",
-                "jetbrains/phpstorm-stubs": "2023.2",
-                "phpstan/phpstan": "2.1.1",
-                "phpstan/phpstan-phpunit": "2.0.3",
-                "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "10.5.39",
-                "slevomat/coding-standard": "8.13.1",
-                "squizlabs/php_codesniffer": "3.10.2",
-                "symfony/cache": "^6.3.8|^7.0",
-                "symfony/console": "^5.4|^6.3|^7.0"
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
@@ -732,11 +696,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/doctrine/dbal/tree/4.4.3"
-=======
-                "source": "https://github.com/doctrine/dbal/tree/4.2.3"
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
             },
             "funding": [
                 {
@@ -752,11 +712,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
             "time": "2026-03-20T08:52:12+00:00"
-=======
-            "time": "2025-03-07T18:29:05+00:00"
->>>>>>> 242cfb05772f2d21cfdc1a1aa710c56c1a596536
         },
         {
             "name": "doctrine/deprecations",
