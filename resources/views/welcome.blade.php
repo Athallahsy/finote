@@ -45,7 +45,6 @@
         a{color:inherit}
         .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
 
-        /* subtle backdrop */
         .field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
         .field::before{
             content:'';position:absolute;top:-15%;right:-10%;width:640px;height:640px;
@@ -53,7 +52,6 @@
             filter:blur(10px);
         }
 
-        /* NAV — floating pill, centered links, logo mark */
         header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 24px 0}
         nav{
             max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;
@@ -82,7 +80,6 @@
         .btn-primary:hover{opacity:.85;transform:translateY(-1px)}
         [data-theme="dark"] .btn-primary{background:var(--accent);color:var(--accent-ink)}
 
-        /* HERO */
         .hero{position:relative;z-index:1;padding:120px 24px 70px;text-align:center}
         .eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-bottom:22px}
         h1.headline{
@@ -94,7 +91,6 @@
         .hero-sub{max-width:500px;margin:0 auto 36px;font-size:1.05rem;line-height:1.6;color:var(--ink-soft)}
         .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
 
-        /* simple balance card mockup */
         .mock{
             max-width:420px;margin:0 auto;background:var(--surface);border:1px solid var(--line);
             border-radius:20px;padding:28px;text-align:left;box-shadow:0 20px 60px -20px rgba(20,20,15,0.15);
@@ -113,7 +109,6 @@
         .mock-item-sub{font-size:.76rem;color:var(--ink-faint)}
         .mock-amount{font-size:.87rem;font-weight:500}
 
-        /* TRUST STRIP */
         .trust{position:relative;z-index:1;padding:36px 24px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
         .trust-row{display:flex;justify-content:center;align-items:center;gap:56px;flex-wrap:wrap;max-width:900px;margin:0 auto}
         .trust-item{text-align:center}
@@ -121,7 +116,6 @@
         .trust-num .accent{color:var(--accent)}
         .trust-label{font-size:.78rem;color:var(--ink-faint);margin-top:2px}
 
-        /* FEATURES */
         .features{position:relative;z-index:1;padding:110px 24px;max-width:1000px;margin:0 auto}
         .features-head{text-align:center;max-width:520px;margin:0 auto 64px}
         .features-head .eyebrow{margin-bottom:14px}
@@ -133,7 +127,6 @@
         .feature-card h3{font-size:1.02rem;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
         .feature-card p{font-size:.87rem;color:var(--ink-soft);line-height:1.6}
 
-        /* CTA */
         .cta{position:relative;z-index:1;text-align:center;padding:90px 24px 130px}
         .cta h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2rem,4.4vw,3.1rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:20px}
         .cta p{color:var(--ink-soft);margin-bottom:34px;font-size:1rem}
@@ -181,10 +174,10 @@
         <div class="wrap">
             <p class="eyebrow reveal">Personal Finance Management</p>
             <h1 class="headline reveal" style="transition-delay:.05s">
-                Track income & expenses,<br><span class="accent-word">effortlessly</span>.
+                Every transaction,<br><span class="accent-word">accounted</span> for.
             </h1>
             <p class="hero-sub reveal" style="transition-delay:.1s">
-                Finote gives you a clear, distraction-free view of your money. Manage transactions, organize categories, export PDF reports, and sync seamlessly with mobile.
+                Finote turns raw income and expense data into a single, clear view — with a Filament-powered admin panel, a REST API for mobile, and reports you can hand off in one click.
             </p>
             <div class="hero-cta reveal" style="transition-delay:.15s">
                 <a href="{{ url('/register') }}" class="btn btn-primary" style="padding:12px 24px">
@@ -200,7 +193,7 @@
                     <div>
                         <div class="mock-label">Total Balance</div>
                         <div class="mock-balance">Rp 18.500.000</div>
-                        <span class="mock-delta"><i data-lucide="trending-up" style="width:13px;height:13px"></i> Active tracking</span>
+                        <span class="mock-delta"><i data-lucide="trending-up" style="width:13px;height:13px"></i> Synced in real time</span>
                     </div>
                     <div class="mock-icon"><i data-lucide="wallet" style="width:17px;height:17px"></i></div>
                 </div>
@@ -209,26 +202,26 @@
                     <div class="mock-item">
                         <div class="mock-icon"><i data-lucide="arrow-down-left" style="width:16px;height:16px"></i></div>
                         <div class="mock-item-text">
-                            <div class="mock-item-title">Gaji Bulanan</div>
-                            <div class="mock-item-sub">Kategori: Income</div>
+                            <div class="mock-item-title">Monthly Salary</div>
+                            <div class="mock-item-sub">Category: Income</div>
                         </div>
                         <div class="mock-amount" style="color:#3D9A5C">+Rp 7.500.000</div>
                     </div>
                     <div class="mock-item">
                         <div class="mock-icon"><i data-lucide="arrow-up-right" style="width:16px;height:16px"></i></div>
                         <div class="mock-item-text">
-                            <div class="mock-item-title">Makanan & Minuman</div>
-                            <div class="mock-item-sub">Kategori: Expense</div>
+                            <div class="mock-item-title">Groceries</div>
+                            <div class="mock-item-sub">Category: Expense</div>
                         </div>
-                        <div class="mock-amount">-$150.000</div>
+                        <div class="mock-amount">-Rp 150.000</div>
                     </div>
                     <div class="mock-item">
                         <div class="mock-icon"><i data-lucide="arrow-up-right" style="width:16px;height:16px"></i></div>
                         <div class="mock-item-text">
-                            <div class="mock-item-title">Tagihan Listrik</div>
-                            <div class="mock-item-sub">Kategori: Expense</div>
+                            <div class="mock-item-title">Electricity Bill</div>
+                            <div class="mock-item-sub">Category: Expense</div>
                         </div>
-                        <div class="mock-amount">-$450.000</div>
+                        <div class="mock-amount">-Rp 450.000</div>
                     </div>
                 </div>
             </div>
@@ -237,55 +230,55 @@
 
     <section class="trust">
         <div class="trust-row">
-            <div class="trust-item reveal"><div class="trust-num"><span class="accent">100</span>%</div><div class="trust-label">User Data Isolated</div></div>
-            <div class="trust-item reveal" style="transition-delay:.05s"><div class="trust-num"><span class="accent">REST</span> API</div><div class="trust-label">Flutter Mobile Ready</div></div>
-            <div class="trust-item reveal" style="transition-delay:.1s"><div class="trust-num"><span class="accent">PDF</span> Export</div><div class="trust-label">Instant Reports</div></div>
+            <div class="trust-item reveal"><div class="trust-num"><span class="accent">100</span>% Isolated</div><div class="trust-label">Per-user data scoping</div></div>
+            <div class="trust-item reveal" style="transition-delay:.05s"><div class="trust-num">REST <span class="accent">API</span></div><div class="trust-label">Sanctum-authenticated, Flutter-ready</div></div>
+            <div class="trust-item reveal" style="transition-delay:.1s"><div class="trust-num"><span class="accent">1</span>-Click</div><div class="trust-label">PDF report export</div></div>
         </div>
     </section>
 
     <section class="features" id="features">
         <div class="features-head">
             <p class="eyebrow reveal">What Finote Offers</p>
-            <h2 class="reveal" style="transition-delay:.05s">Simple tools for complete financial control.</h2>
+            <h2 class="reveal" style="transition-delay:.05s">A complete personal finance system.</h2>
         </div>
         <div class="feature-grid reveal" style="transition-delay:.1s">
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="bar-chart-2" style="width:20px;height:20px"></i></div>
                 <h3>Visual Analytics</h3>
-                <p>Interactive Filament dashboard charts for monthly income vs expense breakdowns and category stats.</p>
+                <p>Interactive charts on a Filament-powered dashboard break down income vs. expenses by month and category.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="file-text" style="width:20px;height:20px"></i></div>
-                <h3>PDF Export</h3>
-                <p>Generate and download clean, printable PDF reports of all your transactions with one click.</p>
+                <h3>One-Click PDF Export</h3>
+                <p>Generate clean, print-ready transaction reports on demand — no manual formatting required.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="folder-tree" style="width:20px;height:20px"></i></div>
                 <h3>Custom Categories</h3>
-                <p>Organize your transactions effortlessly with customizable income and expense categories.</p>
+                <p>Fully relational category structure, not a hardcoded list — built to scale with real usage patterns.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="smartphone" style="width:20px;height:20px"></i></div>
-                <h3>Mobile REST API</h3>
-                <p>Full-featured REST API with Laravel Sanctum authentication, ready for Flutter mobile integration.</p>
+                <h3>Mobile-Ready REST API</h3>
+                <p>Sanctum-authenticated API layer, built for a companion Flutter app — same data, any device.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="shield-check" style="width:20px;height:20px"></i></div>
                 <h3>Strict Data Isolation</h3>
-                <p>Every transaction and category is securely scoped to your user account for maximum privacy.</p>
+                <p>Every transaction and category is scoped to its owner at the query level — enforced, not assumed.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon"><i data-lucide="layout-dashboard" style="width:20px;height:20px"></i></div>
-                <h3>Filament Admin Panel</h3>
-                <p>Manage users, categories, and transactions with a fast, modern Filament 3 web administration panel.</p>
+                <h3>Admin Panel Included</h3>
+                <p>A full Filament 3 back office for managing users, categories, and transactions — production-grade out of the box.</p>
             </div>
         </div>
     </section>
 
     <section class="cta">
         <div class="wrap">
-            <h2 class="reveal">Ready to take control of<br>your personal finances?</h2>
-            <p class="reveal" style="transition-delay:.05s">Start tracking your income and expenses with Finote today.</p>
+            <h2 class="reveal">Start tracking your finances<br>with Finote.</h2>
+            <p class="reveal" style="transition-delay:.05s">Create a free account to get a clear view of your income, expenses, and spending patterns.</p>
             <a href="{{ url('/register') }}" class="btn btn-primary reveal" style="transition-delay:.1s;padding:13px 28px;font-size:.95rem">
                 Get Started Free <i data-lucide="arrow-up-right" style="width:15px;height:15px"></i>
             </a>
@@ -295,6 +288,7 @@
     <footer>
         <div class="foot-row">
             <a href="#" class="logo" style="font-size:1.05rem">Finote<em>.</em></a>
+            <p style="letter-spacing:.03em">Laravel · Filament · Sanctum · REST API · Flutter</p>
             <p>© {{ date('Y') }} Finote. All rights reserved.</p>
         </div>
     </footer>
