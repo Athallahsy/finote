@@ -1,7 +1,5 @@
 <?php
 
-use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
-
 return [
 
     /*
@@ -99,15 +97,5 @@ return [
     */
 
     'system_route_prefix' => 'filament',
-
-    'panels' => [
-        'admin' => [
-            'id' => 'admin',
-            'path' => '/',
-            'plugins' => [
-                FilamentApexChartsPlugin::make(),
-            ],
-        ],
-    ],
 
 ];
