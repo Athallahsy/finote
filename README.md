@@ -60,6 +60,13 @@ php artisan migrate --seed
 php artisan serve
 ```
 
+> 💡 **Catatan Development Assets Lokal (Frontend):**  
+> Untuk mencegah salah deteksi platform deployment (misal SnapDeploy/Render yang keliru menganggap project ini sebagai Node.js project), file konfigurasi Node.js telah di-rename menjadi `.local`.  
+> Jika Anda ingin melakukan kompilasi frontend/assets secara lokal, rename kembali file-file berikut sebelum menjalankan `npm install` atau `npm run dev`:
+> - `package.json.local` ➔ `package.json`
+> - `package-lock.json.local` ➔ `package-lock.json`
+> - `vite.config.js.local` ➔ `vite.config.js`
+
 ## 🔑 API Endpoints
 
 | Method | Endpoint | Description | Auth |
