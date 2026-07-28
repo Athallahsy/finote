@@ -104,4 +104,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 **Athallah Muhammad Syaffa**
 - GitHub: [@Athallahsy](https://github.com/Athallahsy)
-- Portfolio: [athallahsy.github.io/portofolio](https://athallahsy.github.io/portofolio)
+- Portfolio: [athallahsy.vercel.app](https://athallahsy.vercel.app/)
